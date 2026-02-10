@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Base Coin | Wallet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="nav">
+  <span>Base Coin</span>
+  <div>
+    <a href="markets.html">Markets</a>
+    <a href="trade.html">Trade</a>
+    <a href="withdraw.html">Withdraw</a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+  <h2>Wallet Balances</h2>
+
+  <!-- USDT WALLET -->
+  <div class="wallet-card">
+    <p>USDT (TRC20)</p>
+    <h3><span id="usdt">0.00</span> USDT</h3>
+    <button onclick="openDeposit()">Deposit</button>
+  </div>
+
+  <!-- BTC WALLET -->
+  <div class="wallet-card">
+    <p>BTC</p>
+    <h3><span id="btc">0.000000</span> BTC</h3>
+    <button onclick="fakeDeposit('btc')">Deposit</button>
+  </div>
+
+  <!-- ETH WALLET -->
+  <div class="wallet-card">
+    <p>ETH</p>
+    <h3><span id="eth">0.0000</span> ETH</h3>
+    <button onclick="fakeDeposit('eth')">Deposit</button>
+  </div>
+</div>
+
+<!-- DEPOSIT MODAL (USDT TRC20) -->
+<div class="modal" id="depositModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeDeposit()">×</span>
+
+    <h3>Deposit USDT (TRC20)</h3>
+
+    <!-- QR CODE -->
+    <img
+      class="qr"
+      src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TDbEdWWfTuFijK5xXVe6T8nX1oShQkAbD6"
+      alt="USDT TRC20 QR"
+    >
+
+    <!-- WALLET ADDRESS -->
+    <div class="wallet-box" id="walletAddress">
+      TDbEdWWfTuFijK5xXVe6T8nX1oShQkAbD6
+    </div>
+
+    <button onclick="copyAddress()">Copy Address</button>
+
+    <!-- AMOUNT INPUT -->
+    <input
+      type="number"
+      id="amount"
+      placeholder="Enter amount sent (USDT)"
+    >
+
+    <button onclick="confirmDeposit()">I Have Sent</button>
+
+    <p class="small">
+      Send only <b>USDT</b> on the <b>TRC20</b> network.<br>
+      Balance updates after confirmation.<br>
+      Demo / simulated platform.
+    </p>
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+const USDT_ADDRESS = "TDbEdWWfTuFijK5xXVe6T8nX1oShQkAbD6";
+
+function openDeposit() {
+  document.getElementById("depositModal").style.display = "flex";
+}
+
+function closeDeposit() {
+  document.getElementById("depositModal").style.display = "none";
+}
+
+function copyAddress() {
+  navigator.clipboard.writeText(USDT_ADDRESS);
+  alert("USDT address copied");
+}
+
+function confirmDeposit() {
+  const amount = document.getElementById("amount").value;
+  if (!amount || amount <= 0) {
+    alert("Enter a valid amount");
+    return;
+  }
+  document.getElementById("usdt").innerText =
+    parseFloat(amount).toFixed(2);
+  closeDeposit();
+}
+
+/* Fake deposits for BTC & ETH (UI only) */
+function fakeDeposit(coin) {
+  const amt = prompt("Enter amount (demo)");
+  if (!amt || amt <= 0) return;
+
+  if (coin === "btc") {
+    document.getElementById("btc").innerText =
+      parseFloat(amt).toFixed(6);
+  }
+  if (coin === "eth") {
+    document.getElementById("eth").innerText =
+      parseFloat(amt).toFixed(4);
+  }
+}
+</script>
+
+</body>
+</html>
