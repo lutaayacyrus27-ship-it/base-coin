@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Base Coin | Markets</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <span>Base Coin</span>
+  <div>
+    <a href="markets.html">Markets</a>
+    <a href="trade.html">Trade</a>
+    <a href="dashboard.html">Wallet</a>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Markets</h2>
+  <p class="small">Simulated prices (+8% demo markup)</p>
+
+  <table>
+    <tr><th>Pair</th><th>Price</th><th>24h</th></tr>
+    <tr><td>BTC/USDT</td><td id="btcP"></td><td class="green">+2.4%</td></tr>
+    <tr><td>ETH/USDT</td><td id="ethP"></td><td class="red">-1.1%</td></tr>
+    <tr><td>XRP/USDT</td><td id="xrpP"></td><td class="green">+0.9%</td></tr>
+  </table>
+</div>
+
+<script>
+const real={btc:43200, eth:2310, xrp:0.56};
+const m=1.08;
+btcP.innerText="$"+(real.btc*m).toFixed(2);
+ethP.innerText="$"+(real.eth*m).toFixed(2);
+xrpP.innerText="$"+(real.xrp*m).toFixed(4);
+</script>
+
+</body>
+</html>
